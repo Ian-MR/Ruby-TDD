@@ -27,7 +27,7 @@ class Dollar < Money
         super(amount,currency)
     end
     def times(multiplier)    
-        Money.dollar(@amount * multiplier)
+        Dollar.new(@amount * multiplier,@currency)
     end
 end
 
@@ -37,6 +37,6 @@ class Franc < Money
         super(amount,currency)
     end
     def times(multiplier)    
-        Money.franc(@amount * multiplier)
+        Money.new(@amount * multiplier,@currency)
     end
 end
