@@ -7,10 +7,10 @@ class Money
         Money.new(@amount * multiplier,@currency)
     end
     def self.dollar(amount)
-        Dollar.new(amount,"USD")
+        Money.new(amount,"USD")
     end
     def self.franc(amount)
-        Franc.new(amount,"CHF")
+        Money.new(amount,"CHF")
     end
     def currency
         @currency
@@ -21,19 +21,5 @@ class Money
     private 
     def amount
         @amount
-    end
-end
-
-class Dollar < Money
-    #attr_reader :amount
-    def initialize(amount,currency)
-        super(amount,currency)
-    end
-end
-
-class Franc < Money
-    #attr_reader :amount
-    def initialize(amount,currency)
-        super(amount,currency)
     end
 end
