@@ -1,4 +1,10 @@
 class Money 
+    def self.dollar(amount)
+        Dollar.new(amount)
+    end
+    def self.franc(amount)
+        Franc.new(amount)
+    end
     def ==(money)
         @amount == money.instance_variable_get(:@amount) && self.class == money.class
     end
