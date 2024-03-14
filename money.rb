@@ -3,6 +3,9 @@ class Money
         @amount = amount
         @currency = currency
     end
+    def times(multiplier)    
+        Money.new(@amount * multiplier,@currency)
+    end
     def self.dollar(amount)
         Dollar.new(amount,"USD")
     end
@@ -26,17 +29,11 @@ class Dollar < Money
     def initialize(amount,currency)
         super(amount,currency)
     end
-    def times(multiplier)    
-        Dollar.new(@amount * multiplier,@currency)
-    end
 end
 
 class Franc < Money
     #attr_reader :amount
     def initialize(amount,currency)
         super(amount,currency)
-    end
-    def times(multiplier)    
-        Money.new(@amount * multiplier,@currency)
     end
 end
