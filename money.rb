@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require_relative 'dollar'
+require_relative 'franc'
 
 class Test < Minitest::Test
     def test_franc_multiplication
