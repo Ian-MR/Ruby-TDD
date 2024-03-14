@@ -1,6 +1,6 @@
 class Money 
     def ==(money)
-        @amount == money.instance_variable_get(:@amount)
+        @amount == money.instance_variable_get(:@amount) && self.class == money.class
     end
     private 
     def amount
