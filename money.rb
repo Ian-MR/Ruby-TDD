@@ -5,6 +5,9 @@ class Money
     def self.franc(amount)
         Franc.new(amount)
     end
+    def currency
+        @currency
+    end
     def ==(money)
         @amount == money.instance_variable_get(:@amount) && self.class == money.class
     end
@@ -18,6 +21,7 @@ class Dollar < Money
     #attr_reader :amount
     def initialize(amount)
         @amount = amount
+        @currency = "USD"
     end
     def times(multiplier)    
         Dollar.new(@amount * multiplier)
@@ -28,6 +32,7 @@ class Franc < Money
     #attr_reader :amount
     def initialize(amount)
         @amount = amount
+        @currency = "CHF"
     end
     def times(multiplier)    
         Franc.new(@amount * multiplier)
