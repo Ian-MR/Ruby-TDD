@@ -6,6 +6,9 @@ class Money
     def times(multiplier)    
         Money.new(@amount * multiplier,@currency)
     end
+    def reduce(to)
+        self
+    end
     def plus(addend)
         Sum.new(self, addend)
     end
@@ -29,9 +32,7 @@ end
 
 class Bank
     def reduce(source,to)
-        sum = source
-        amount = sum.augend.instance_variable_get(:@amount) + sum.addend.instance_variable_get(:@amount)
-        Money.new(amount, to)
+        source.reduce(to)
     end
 end
 
@@ -40,5 +41,9 @@ class Sum
     def initialize(augend, addend)
         @augend = augend
         @addend = addend
+    end
+    def reduce(to)
+        amount = @augend.instance_variable_get(:@amount) + @addend.instance_variable_get(:@amount)
+        Money.new(amount, to)
     end
 end
