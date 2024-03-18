@@ -29,7 +29,9 @@ end
 
 class Bank
     def reduce(source,to)
-        Money.dollar(10)
+        sum = source
+        amount = sum.augend.instance_variable_get(:@amount) + sum.addend.instance_variable_get(:@amount)
+        Money.new(amount, to)
     end
 end
 

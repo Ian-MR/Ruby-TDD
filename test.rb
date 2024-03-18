@@ -35,4 +35,10 @@ class Test < Minitest::Test
         assert_equal(five, sum.augend) 
         assert_equal(five, sum.addend)
     end
+    def test_reduce_sum
+        sum = Sum.new(Money.dollar(3), Money.dollar(4))
+        bank = Bank.new()
+        result = bank.reduce(sum, "USD")
+        assert_equal(Money.dollar(7), result)
+    end
 end
