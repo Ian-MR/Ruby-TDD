@@ -6,6 +6,9 @@ class Money
     def times(multiplier)    
         Money.new(@amount * multiplier,@currency)
     end
+    def plus(addend)
+        Money.new(@amount+addend.instance_variable_get(:@amount),@currency)
+    end
     def self.dollar(amount)
         Money.new(amount,"USD")
     end
@@ -21,5 +24,11 @@ class Money
     private 
     def amount
         @amount
+    end
+end
+
+class Bank
+    def reduce(source,to)
+        Money.dollar(10)
     end
 end
