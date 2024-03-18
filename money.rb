@@ -7,7 +7,7 @@ class Money
         Money.new(@amount * multiplier,@currency)
     end
     def plus(addend)
-        Money.new(@amount+addend.instance_variable_get(:@amount),@currency)
+        Sum.new(self, addend)
     end
     def self.dollar(amount)
         Money.new(amount,"USD")
@@ -30,5 +30,13 @@ end
 class Bank
     def reduce(source,to)
         Money.dollar(10)
+    end
+end
+
+class Sum
+    attr_reader :augend, :addend
+    def initialize(augend, addend)
+        @augend = augend
+        @addend = addend
     end
 end
