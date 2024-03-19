@@ -6,8 +6,9 @@ class Money
     def times(multiplier)    
         Money.new(@amount * multiplier,@currency)
     end
-    def reduce(to)
-        self
+    def reduce(bank,to)
+        rate = bank.rate(@currency, to)
+        Money.new(amount/rate,to)
     end
     def plus(addend)
         Sum.new(self, addend)
@@ -31,8 +32,21 @@ class Money
 end
 
 class Bank
+    def initialize
+        @rates = Hash.new(0)
+    end
     def reduce(source,to)
-        source.reduce(to)
+        source.reduce(self,to)
+    end
+    def addRate(from,to,rate)
+        @rates[Pair.new(from,to)] = rate
+    end
+    def rate(from, to)
+        if from == to
+            1
+        else
+            @rates[Pair.new(from,to)]
+        end
     end
 end
 
@@ -42,8 +56,27 @@ class Sum
         @augend = augend
         @addend = addend
     end
-    def reduce(to)
+    def reduce(bank,to)
         amount = @augend.instance_variable_get(:@amount) + @addend.instance_variable_get(:@amount)
         Money.new(amount, to)
+    end
+end
+
+class Pair
+    attr_reader :from, :to
+    def initialize(from,abc)
+        @from = from
+        @to =  abc
+    end
+    def ==(object)
+        pair = object
+        @from == pair.from && @to == pair.to
+    end
+    def eql?(object)
+        pair = object
+        @from.eql?(pair.from) && @to.eql?(pair.to)
+    end
+    def hash()
+        0
     end
 end

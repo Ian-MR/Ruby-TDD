@@ -42,8 +42,17 @@ class Test < Minitest::Test
         assert_equal(Money.dollar(7), result)
     end
     def test_reduce_money
-        bank = Bank.new
+       bank = Bank.new
         result = bank.reduce(Money.dollar(1),"USD")
         assert_equal(Money.dollar(1), result)
+    end
+    def test_reduce_money_different_Currency
+        bank = Bank.new
+        bank.addRate("CHF","USD",2)
+        result = bank.reduce(Money.franc(2),"USD")
+        assert_equal(Money.dollar(1),result)
+    end
+    def test_identity_rate
+        assert_equal(1,Bank.new.rate("USD", "USD"))
     end
 end
