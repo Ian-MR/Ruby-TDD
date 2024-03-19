@@ -63,4 +63,22 @@ class Test < Minitest::Test
         result = bank.reduce(five_bucks.plus(ten_francs),"USD")
         assert_equal(Money.dollar(10),result)
     end
+    def test_sum_plus
+        five_bucks = Money.dollar(5)
+        ten_francs = Money.franc(10)
+        bank = Bank.new
+        bank.addRate("CHF","USD",2)
+        sum = Sum.new(five_bucks, ten_francs).plus(five_bucks)
+        result = bank.reduce(sum,"USD")
+        assert_equal(Money.dollar(15),result)
+    end
+    def test_sum_times
+        five_bucks = Money.dollar(5)
+        ten_francs = Money.franc(10)
+        bank = Bank.new
+        bank.addRate("CHF","USD",2)
+        sum = Sum.new(five_bucks, ten_francs).times(2)
+        result = bank.reduce(sum,"USD")
+        assert_equal(Money.dollar(20),result)
+    end
 end
