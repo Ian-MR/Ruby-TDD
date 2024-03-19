@@ -57,7 +57,7 @@ class Sum
         @addend = addend
     end
     def reduce(bank,to)
-        amount = @augend.instance_variable_get(:@amount) + @addend.instance_variable_get(:@amount)
+        amount = @augend.reduce(bank,to).instance_variable_get(:@amount) + @addend.reduce(bank,to).instance_variable_get(:@amount)
         Money.new(amount, to)
     end
 end
